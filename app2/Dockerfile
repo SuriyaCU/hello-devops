@@ -3,10 +3,7 @@ WORKDIR /app
 COPY app.py .
 RUN pip install flask
 
-# NEW: Prevents Python from buffering stdout and stderr
+# Ensures logs are printed immediately to Jenkins console
 ENV PYTHONUNBUFFERED=1
-
-# NEW: Documentation for the port
-EXPOSE 5000
 
 CMD ["python", "app.py"]
