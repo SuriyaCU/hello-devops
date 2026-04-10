@@ -1,12 +1,11 @@
 {
-  "name": "my-node-app",
+  "name": "hello-devops-app",
   "version": "1.0.0",
-  "description": "Simple Node.js app for Jenkins CI/CD demo",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
