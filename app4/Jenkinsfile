@@ -1,32 +1,26 @@
 pipeline {
     agent any
-
     environment {
         IMAGE_NAME = "hello-devops-app"
-        GIT_CREDS = 'github-token-id' 
     }
-
     stages {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', 
-                    credentialsId: "${GIT_CREDS}", 
+                    credentialsId: 'github-token-id', 
                     url: 'https://github.com/SuriyaCU/hello-devops.git'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t ${IMAGE_NAME} -f app4/Dockerfile ./app4"
             }
         }
-
         stage('Run Container') {
             steps {
                 script {
                     sh "docker ps -q --filter name=${IMAGE_NAME} | xargs -r docker stop"
                     sh "docker ps -aq --filter name=${IMAGE_NAME} | xargs -r docker rm"
-                    
                     sh "docker run -d --name ${IMAGE_NAME} -p 3000:3000 ${IMAGE_NAME}"
                 }
             }
