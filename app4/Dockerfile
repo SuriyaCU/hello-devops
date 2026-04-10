@@ -1,18 +1,12 @@
 FROM node:18-alpine
-
 WORKDIR /app
 
-# Copy package files first to cache layers
+# Copies from the build context (which we will set to app4)
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of your code
+# Copies index.js and other files into /app
 COPY . .
 
-# Expose the port
 EXPOSE 3000
-
-# Start the app
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
